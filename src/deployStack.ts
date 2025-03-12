@@ -6,8 +6,7 @@ import * as core from '@actions/core'
 
 type DeployStack = {
   portainerHost: string
-  username: string
-  password: string
+  accessToken: string
   swarmId?: string
   endpointId: number
   stackName: string
@@ -50,8 +49,7 @@ function generateNewStackDefinition(
 
 export async function deployStack({
   portainerHost,
-  username,
-  password,
+  accessToken,
   swarmId,
   endpointId,
   stackName,
@@ -59,7 +57,7 @@ export async function deployStack({
   templateVariables,
   image
 }: DeployStack): Promise<void> {
-  const portainerApi = new PortainerApi(portainerHost)
+  const portainerApi = new PortainerApi(portainerHost, accessToken)
 
   const stackDefinitionToDeploy = generateNewStackDefinition(
     stackDefinitionFile,
@@ -67,12 +65,6 @@ export async function deployStack({
     image
   )
   core.debug(stackDefinitionToDeploy)
-
-  core.info('Logging in to Portainer instance...')
-  await portainerApi.login({
-    username,
-    password
-  })
 
   try {
     const allStacks = await portainerApi.getStacks()
@@ -111,8 +103,5 @@ export async function deployStack({
   } catch (error) {
     core.info('⛔️ Something went wrong during deployment!')
     throw error
-  } finally {
-    core.info(`Logging out from Portainer instance...`)
-    await portainerApi.logout()
   }
 }
