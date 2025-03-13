@@ -35,9 +35,7 @@ export class PortainerApi {
   }
 
   async createStack(params: CreateStackParams, body: CreateStackBody): Promise<void> {
-    let path = body.swarmID
-      ? '/stacks/create/swarm/string'
-      : '/stacks/create/standalone/string'
+    const path = body.swarmID ? '/stacks/create/swarm/string' : '/stacks/create/standalone/string'
     await this.axiosInstance.post(path, body, { params })
   }
 
