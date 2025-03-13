@@ -1,6 +1,6 @@
 name: 'Deploy a Portainer stack'
 description: 'Github Action to deploy a stack to a Portainer instance'
-author: 'Carl Rygart <carlrygart>'
+author: 'Daniel Gómez <dann41>'
 branding:
   icon: 'cloud'
   color: 'blue'
@@ -9,12 +9,9 @@ inputs:
   portainer-host:
     required: true
     description: 'Portainer host, eg. https://myportainer.instance.com'
-  username:
+  access-token:
     required: true
-    description: 'Username for the Portainer login. NOTE: Do not use admin account! Create a new CI specific login'
-  password:
-    required: true
-    description: 'Password for the Portainer login'
+    description: 'User access token for Portainer API. NOTE: Do not use access tokens for admin account!'
   swarm-id:
     required: false
     description: 'ID of the swarm. Only required if you deploy to a swarm.'

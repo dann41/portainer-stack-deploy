@@ -22,23 +22,11 @@ type UpdateStackBody = { env: EnvVariables; stackFileContent: string }
 export class PortainerApi {
   private axiosInstance
 
-  constructor(host: string) {
+  constructor(host: string, accessToken: string) {
     this.axiosInstance = axios.create({
       baseURL: `${host}/api`
     })
-  }
-
-  async login({ username, password }: { username: string; password: string }): Promise<void> {
-    const { data } = await this.axiosInstance.post<{ jwt: string }>('/auth', {
-      username,
-      password
-    })
-    this.axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${data.jwt}`
-  }
-
-  async logout(): Promise<void> {
-    await this.axiosInstance.post('/auth/logout')
-    this.axiosInstance.defaults.headers.common['Authorization'] = ''
+    this.axiosInstance.defaults.headers.common['x-api-key'] = accessToken
   }
 
   async getStacks(): Promise<StackData[]> {

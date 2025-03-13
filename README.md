@@ -11,10 +11,9 @@ Portainer-stack-deploy is a GitHub Action for deploying a newly updated stack to
 ## Action Inputs
 
 | Input              | Description                                                                                                                                                                  | Default      |
-| ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
+|--------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| ------------ |
 | portainer-host     | Portainer host, eg. `https://myportainer.instance.com`                                                                                                                       | **Required** |
-| username           | Username for the Portainer login. **NOTE: Do not use admin account!** Create a new CI specific login instead                                                                 | **Required** |
-| password           | Password for the Portainer login                                                                                                                                             | **Required** |
+| access-token       | User access token for Portainer API. **NOTE: Do not use access tokens for admin account!** Create a new CI specific login instead                                            | **Required** |
 | swarm-id           | ID of the swarm. Only required if you deploy to a swarm                                                                                                                      |              |
 | endpoint-id        | ID of the Portainer node to deploy to                                                                                                                                        | 1            |
 | stack-name         | Name for the Portainer stack                                                                                                                                                 | **Required** |
@@ -75,8 +74,7 @@ jobs:
         uses: carlrygart/portainer-stack-deploy@v1
         with:
           portainer-host: ${{ secrets.PORTAINER_HOST }}
-          username: ${{ secrets.PORTAINER_USERNAME }}
-          password: ${{ secrets.PORTAINER_PASSWORD }}
+          access-token: ${{ secrets.PORTAINER_ACCESS_TOKEN }}
           stack-name: 'my-awesome-web-app'
           stack-definition: 'stack-definition.yml'
           template-variables: '{"username": "MrCool"}'
