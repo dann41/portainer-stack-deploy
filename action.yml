@@ -1,4 +1,4 @@
-name: 'Deploy to Portainer'
+name: 'Portainer Stack deployer'
 description: 'Github Action to deploy a stack to a Portainer instance'
 author: 'Daniel Gómez <dann41>'
 branding:
