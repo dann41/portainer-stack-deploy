@@ -71,7 +71,7 @@ jobs:
         shell: bash
 
       - name: Deploy stack to Portainer
-        uses: carlrygart/portainer-stack-deploy@v1
+        uses: dann41/portainer-stack-deploy@v1
         with:
           portainer-host: ${{ secrets.PORTAINER_HOST }}
           access-token: ${{ secrets.PORTAINER_ACCESS_TOKEN }}
